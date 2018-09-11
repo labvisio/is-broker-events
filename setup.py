@@ -16,7 +16,7 @@ setup(
     },
     zip_safe=False,
     install_requires=[
-        'is-wire==1.1.1',
+        'is-wire==1.1.2',
         'is-msgs==1.1.5',
         'requests==2.19.1',
     ],
