@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='is_broker_events',
-    version='0.0.1',
+    version='0.0.3',
     description='',
     url='http://github.com/labviros/is-broker-events',
     author='labviros',
