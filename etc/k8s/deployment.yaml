@@ -25,7 +25,7 @@ spec:
     spec:
       containers:
       - name: service 
-        image: viros/is-broker-events:0.0.3
+        image: labviros/is-broker-events:0.0.3
         imagePullPolicy: Always
         command: ["is-broker-events"]
         args: ["--config", "/config/options.json"]

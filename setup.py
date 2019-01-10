@@ -18,6 +18,6 @@ setup(
     install_requires=[
         'is-wire==1.1.2',
         'is-msgs==1.1.5',
-        'requests==2.19.1',
+        'requests==2.20.0',
     ],
 )

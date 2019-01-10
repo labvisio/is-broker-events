@@ -1,0 +1,5 @@
+{
+  "log_level": "DEBUG",
+  "broker_uri": "amqp://guest:guest@localhost:5672",
+  "management_uri": "http://guest:guest@localhost:15672"
+}
