@@ -1,0 +1,6 @@
+syntax = "proto3";
+
+message BrokerEventsOptions {
+    string broker_uri = 1;
+    string management_uri = 2;
+}
