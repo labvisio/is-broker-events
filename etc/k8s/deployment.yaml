@@ -1,22 +1,12 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: is-broker-events-config
-  namespace: default
-data:
-  config: |-
-    {
-      "broker_uri": "amqp://rabbitmq.default",
-      "management_uri": "http://guest:guest@rabbitmq.default",
-      "log_level": "DEBUG"
-    }
----
-
-apiVersion: extensions/v1beta1 
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "is-broker-events"
+  name: is-broker-events
+  namespace: default
 spec:
+  selector:
+    matchLabels:
+      app: is-broker-events
   replicas: 1
   template:
     metadata:
@@ -25,21 +15,24 @@ spec:
     spec:
       containers:
       - name: service 
-        image: labviros/is-broker-events:0.0.3
+        image: labvisio/is-broker-events:0.0.4
         imagePullPolicy: Always
         command: ["is-broker-events"]
-        args: ["--config", "/config/options.json"]
+        args: ["/etc/is-broker-events/options.json"]
+        env:
+        - name: LOG_LEVEL
+          value: "DEBUG"
         resources:
           limits: 
             cpu: "1.0"
             memory: 256Mi
         volumeMounts:
           - name: options
-            mountPath: /config
+            mountPath: /etc/is-broker-events
       volumes:
       - name: options
         configMap:
-          name: is-broker-events-config
+          name: is-broker-events
           items:
-          - key: config
+          - key: options
             path: options.json

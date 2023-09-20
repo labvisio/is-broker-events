@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: is-broker-events
+  namespace: default
+data:
+  options: |-
+    {
+      "broker_uri": "amqp://rabbitmq.default",
+      "management_uri": "http://guest:guest@rabbitmq.default"
+    }
