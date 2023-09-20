@@ -8,7 +8,7 @@ This service queries the broker management API to get an initial list of all bin
 
 If you want to receive a consumer list for each topic, you can simply subscribe to receive messages with the topic `BrokerEvents.Consumers` and everytime the list is updated, you are going to receive a new message. This is really usefull for some applications as [is-robot-controller](https://github.com/labviros/is-robot-controller), that uses this service to monitor available cameras in the IS architeture. The message with the consumer list is structured as:
 
-```cpp
+```protobuf
 message ConsumerInfo {
   // List of consumers.
   repeated string consumers = 2;
@@ -22,7 +22,8 @@ message ConsumerList {
 
 Below is an example of what this message looks like:
 
-```bash
+```python
+>>> from is_msgs.common_pb2 import ConsumerList
 >>> from is_wire.core import Channel, Subscription
 >>> channel = Channel("amqp://guest:guest@localhost:5672")
 >>> subscription = Subscription(channel)
@@ -86,11 +87,15 @@ info {
 }
 ```
 
+## Configuration
+
+The behavior of the service can be customized by passing a JSON configuration file as the first argument, e.g: `is-broker-events etc/conf/options.json`. The schema for this file can be found in [`is_broker_events/conf/options.proto`](https://github.com/labvisio/is-broker-events/blob/master/is_broker_events/conf/options.proto). An example configuration file can be found in [`etc/conf/options.json`](https://github.com/labvisio/is-broker-events/blob/master/etc/conf/options.json).
+
 ## RabbitMQ Event Exchange
 
-The broker is deployed using a plugin known as the [RabbitMQ Event Exchange](https://github.com/rabbitmq/rabbitmq-server/tree/master/deps/rabbitmq_event_exchange). This plugin serves as an interface to the internal event system of RabbitMQ, allowing clients to consume these events as messages. It's useful when you need to monitor specific events, such as the creation and deletion of queues, exchanges, bindings, users, connections, and channels.
+The broker is deployed using a plugin known as the [RabbitMQ Event Exchange](https://github.com/rabbitmq/rabbitmq-server/tree/main/deps/rabbitmq_event_exchange). This plugin serves as an interface to the internal event system of RabbitMQ, allowing clients to consume these events as messages. It's useful when you need to monitor specific events, such as the creation and deletion of queues, exchanges, bindings, users, connections, and channels.
 
-This plugin declares a topic exchange named "amq.rabbitmq.event" within the default virtual host. All events are dispatched to this exchange with routing keys like `exchange.created`, `binding.deleted` and so on. Consequently, you can selectively subscribe to only the events that are of interest to you.
+This plugin declares a topic exchange named `amq.rabbitmq.event` within the default virtual host. All events are dispatched to this exchange with routing keys like `exchange.created`, `binding.deleted` and so on. Consequently, you can selectively subscribe to only the events that are of interest to you.
 
 In the context of deploying the broker within the IS architecture, certain configurations are put in place. One of these configurations involves establishing a binding between the `amq.rabbitmq.event` exchange and the `is` exchange. Consequently, any event that occurs within the broker becomes available as a message that can be consumed by any client. Below you can see an example of how such a definition is defined.
 
