@@ -1,4 +1,4 @@
-# is-broker-events
+# Broker Events Service
 
 [![Docker image tag](https://img.shields.io/docker/v/labvisio/is-broker-events?sort=semver&style=flat-square)](https://hub.docker.com/r/labvisio/is-broker-events/tags)
 [![Docker image size](https://img.shields.io/docker/image-size/labvisio/is-broker-events?sort=semver&style=flat-square)](https://hub.docker.com/r/labvisio/is-broker-events)
