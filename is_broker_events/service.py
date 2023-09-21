@@ -69,7 +69,6 @@ class BrokerEvents(object):
                 response.raise_for_status()
                 bindings = response.json()
                 success = True
-                return response
             except (HTTPConnectionError, HTTPError, JSONDecodeError, Timeout) as ex:
                 self.log.warn("Could not fetch list of binding, why='{}'", ex)
                 time.sleep(5)
