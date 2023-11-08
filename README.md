@@ -91,6 +91,12 @@ info {
 
 The behavior of the service can be customized by passing a JSON configuration file as the first argument, e.g: `is-broker-events etc/conf/options.json`. The schema for this file can be found in [`is_broker_events/conf/options.proto`](https://github.com/labvisio/is-broker-events/blob/master/is_broker_events/conf/options.proto). An example configuration file can be found in [`etc/conf/options.json`](https://github.com/labvisio/is-broker-events/blob/master/etc/conf/options.json).
 
+## Examples
+
+In the [examples](https://github.com/labvisio/is-broker-events/blob/master/examples) directory, you can find a series of examples that may be useful to you. The examples available are:
+
+* [`get_available_cameras.py`](https://github.com/labvisio/is-broker-events/blob/master/examples/get_available_cameras.py): Script to find online cameras in the IS, it subscribes to receive the consumer list from this service and filter topics that match the RPC configuration topic provided by the cameras services, such as [is-spinnaker-gateway](https://github.com/labvisio/is-spinnaker-gateway).
+
 ## RabbitMQ Event Exchange
 
 The broker is deployed using a plugin known as the [RabbitMQ Event Exchange](https://github.com/rabbitmq/rabbitmq-server/tree/main/deps/rabbitmq_event_exchange). This plugin serves as an interface to the internal event system of RabbitMQ, allowing clients to consume these events as messages. It's useful when you need to monitor specific events, such as the creation and deletion of queues, exchanges, bindings, users, connections, and channels.
