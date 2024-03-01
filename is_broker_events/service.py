@@ -45,7 +45,8 @@ class BrokerEvents(object):
             if event == "created":
                 self.consumers.info[topic].consumers.append(queue)
             elif event == "deleted":
-                self.consumers.info[topic].consumers.remove(queue)
+                if queue in self.consumers.info[topic].consumers:
+                    self.consumers.info[topic].consumers.remove(queue)
                 if len(self.consumers.info[topic].consumers) == 0:
                     del self.consumers.info[topic]
 
