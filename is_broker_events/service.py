@@ -14,6 +14,7 @@ from is_broker_events.logger import Logger
 
 
 class BrokerEvents(object):
+
     def __init__(self, options: BrokerEventsOptions) -> None:
         self.log = Logger(name="BrokerEvents")
         self.log.debug("Connecting to RabbitMQ broker at: '{}'", options.broker_uri)
@@ -32,10 +33,8 @@ class BrokerEvents(object):
             msg = self.channel.consume()
             self.log.debug("topic='{}' metadata={}", msg.topic, msg.metadata)
 
-            if (
-                msg.metadata["destination_kind"] != "queue"
-                or msg.metadata["source_name"] != "is"
-            ):
+            if (msg.metadata["destination_kind"] != "queue"
+                    or msg.metadata["source_name"] != "is"):
                 continue
 
             event = msg.topic.split(".")[-1]
@@ -58,7 +57,10 @@ class BrokerEvents(object):
             )
 
     def query_consumers_http(
-        self, management_uri: str, max_retries: int = 5, timeout: int = 5
+        self,
+        management_uri: str,
+        max_retries: int = 5,
+        timeout: int = 5,
     ) -> ConsumerList:
         url = urljoin(management_uri, "/api/bindings")
         success = False
@@ -74,19 +76,14 @@ class BrokerEvents(object):
                 self.log.warn("Could not fetch list of binding, why='{}'", ex)
                 time.sleep(5)
         if not success:
-            self.log.critical(
-                "Could not fetch list of binding, reached max_retries={}", max_retries
-            )
+            self.log.critical("Could not fetch list of binding, reached max_retries={}",
+                              max_retries)
         bindings = [
-            b
-            for b in bindings
-            if b["destination_type"] == "queue" and b["source"] == "is"
+            b for b in bindings if b["destination_type"] == "queue" and b["source"] == "is"
         ]
         consumers = ConsumerList()
         for binding in bindings:
-            consumers.info[binding["routing_key"]].consumers.append(
-                binding["destination"]
-            )
+            consumers.info[binding["routing_key"]].consumers.append(binding["destination"])
         return consumers
 
 
