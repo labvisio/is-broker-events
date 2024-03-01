@@ -7,5 +7,9 @@ data:
   options: |-
     {
       "broker_uri": "amqp://rabbitmq.default",
-      "management_uri": "http://guest:guest@rabbitmq.default"
+      "broker_management_api": {
+        "uri": "http://guest:guest@rabbitmq.default",
+        "max_retries": 10,
+        "timeout": 5.0
+      } 
     }

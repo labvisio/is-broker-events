@@ -24,9 +24,11 @@ class BrokerEvents(object):
         self.subscription.subscribe(topic="binding.*")
 
         self.consumers = self.query_consumers_http(
-            management_uri=options.management_uri
+            management_uri=options.broker_management_api.uri,
+            max_retries=options.broker_management_api.max_retries,
+            timeout=options.broker_management_api.timeout,
         )
-        self.log.debug("Got list of consumers at: '{}'", options.management_uri)
+        self.log.debug("Got list of consumers at: '{}'", options.broker_management_api.uri)
 
     def run(self) -> None:
         while True:
