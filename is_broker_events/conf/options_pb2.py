@@ -13,13 +13,15 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\roptions.proto\"A\n\x13\x42rokerEventsOptions\x12\x12\n\nbroker_uri\x18\x01 \x01(\t\x12\x16\n\x0emanagement_uri\x18\x02 \x01(\tb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\roptions.proto\"H\n\x13\x42rokerManagementApi\x12\x0b\n\x03uri\x18\x01 \x01(\t\x12\x0f\n\x07timeout\x18\x02 \x01(\x01\x12\x13\n\x0bmax_retries\x18\x03 \x01(\x05\"^\n\x13\x42rokerEventsOptions\x12\x12\n\nbroker_uri\x18\x01 \x01(\t\x12\x33\n\x15\x62roker_management_api\x18\x02 \x01(\x0b\x32\x14.BrokerManagementApib\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'options_pb2', globals())
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _BROKEREVENTSOPTIONS._serialized_start=17
-  _BROKEREVENTSOPTIONS._serialized_end=82
+  _BROKERMANAGEMENTAPI._serialized_start=17
+  _BROKERMANAGEMENTAPI._serialized_end=89
+  _BROKEREVENTSOPTIONS._serialized_start=91
+  _BROKEREVENTSOPTIONS._serialized_end=185
 # @@protoc_insertion_point(module_scope)

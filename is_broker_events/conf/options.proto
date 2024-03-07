@@ -1,6 +1,17 @@
 syntax = "proto3";
 
+message BrokerManagementApi {
+    // broker uri (e.g.: 'http://guest:guest@localhost:15672').
+    string uri = 1;
+    // period of time to wait before the request timeout.
+    double timeout = 2;
+    // max number of attempts to obtain a initial list of consumers.
+    int32 max_retries = 3;
+}
+
 message BrokerEventsOptions {
+    // broker uri (e.g.: 'amqp://guest:guest@localhost:5672').
     string broker_uri = 1;
-    string management_uri = 2;
+    // broker management API options.
+    BrokerManagementApi broker_management_api = 2;
 }
