@@ -62,11 +62,12 @@ class BrokerEvents(object):
         self,
         management_uri: str,
         max_retries: int = 5,
-        timeout: int = 5,
+        timeout: float = 5,
     ) -> ConsumerList:
         url = urljoin(management_uri, "/api/bindings")
         success = False
-        for _ in range(max_retries):
+        attempts = 0
+        while not success:
             try:
                 response = requests.get(url=url, timeout=timeout)
                 # raise expection if failed to get list of bindings
@@ -75,11 +76,11 @@ class BrokerEvents(object):
                 bindings = response.json()
                 success = True
             except (HTTPConnectionError, HTTPError, JSONDecodeError, Timeout) as ex:
-                self.log.warn("Could not fetch list of binding, why='{}'", ex)
+                attempts += 1
+                if attempts >= max_retries:
+                    self.log.critical("Could not fetch list of bindings, why='{}'", ex)
+                self.log.warn("Could not fetch list of bindings, why='{}'", ex)
                 time.sleep(5)
-        if not success:
-            self.log.critical("Could not fetch list of binding, reached max_retries={}",
-                              max_retries)
         bindings = [
             b for b in bindings if b["destination_type"] == "queue" and b["source"] == "is"
         ]
