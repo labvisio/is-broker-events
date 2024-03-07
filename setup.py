@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='is_broker_events',
-    version='0.0.4',
+    version='0.1.0',
     description='',
     url='http://github.com/labvisio/is-broker-events',
     author='labvisio',
