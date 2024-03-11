@@ -1,4 +1,8 @@
 {
-  "broker_uri": "amqp://guest:guest@localhost:5672",
-  "management_uri": "http://guest:guest@localhost:15672"
+  "broker_uri": "amqp://guest:guest@guest:guest@rabbitmq.default",
+  "broker_management_api": {
+    "uri": "http://guest:guest@rabbitmq.default",
+    "max_retries": 10,
+    "timeout": 5.0
+  }
 }

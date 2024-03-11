@@ -3,13 +3,13 @@ import re
 import socket
 
 from is_msgs.common_pb2 import ConsumerList
-from is_wire.core import Subscription, Channel
+from is_wire.core import Channel, Subscription
 
 RE_CAMERA_GATEWAY_CONSUMER = re.compile("CameraGateway\\.(\\d+)\\.GetConfig")
 
-if __name__ == "__main__":
 
-    broker_uri = json.load(open("../etc/conf/options.json"))["broker_uri"]
+def main() -> None:
+    broker_uri = json.load(open("../conf/options.json"))["broker_uri"]
     channel = Channel(broker_uri)
     subscription = Subscription(channel)
     subscription.subscribe("BrokerEvents.Consumers")
@@ -26,4 +26,7 @@ if __name__ == "__main__":
         print(f'Available Cameras {available_cameras}')
     except socket.timeout:
         print('No reply :(')
-   
+
+
+if __name__ == "__main__":
+    main()

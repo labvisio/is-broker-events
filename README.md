@@ -93,9 +93,9 @@ The behavior of the service can be customized by passing a JSON configuration fi
 
 ## Examples
 
-In the [examples](https://github.com/labvisio/is-broker-events/blob/master/examples) directory, you can find a series of examples that may be useful to you. The examples available are:
+In the [examples](https://github.com/labvisio/is-broker-events/blob/master/etc/examples) directory, you can find a series of examples that may be useful to you. The examples available are:
 
-* [`get_available_cameras.py`](https://github.com/labvisio/is-broker-events/blob/master/examples/get_available_cameras.py): Script to find online cameras in the IS, it subscribes to receive the consumer list from this service and filter topics that match the RPC configuration topic provided by the cameras services, such as [is-spinnaker-gateway](https://github.com/labvisio/is-spinnaker-gateway).
+* [`get_available_cameras.py`](https://github.com/labvisio/is-broker-events/blob/master/etc/examples/get_available_cameras.py): Script to find online cameras in the IS, it subscribes to receive the consumer list from this service and filter topics that match the RPC configuration topic provided by the cameras services, such as [is-spinnaker-gateway](https://github.com/labvisio/is-spinnaker-gateway).
 
 ## RabbitMQ Event Exchange
 
